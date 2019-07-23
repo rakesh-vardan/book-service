@@ -1,6 +1,7 @@
 package com.epam.jpop.bookservice.service.impl;
 
 import com.epam.jpop.bookservice.domain.Book;
+import com.epam.jpop.bookservice.domain.Result;
 import com.epam.jpop.bookservice.exception.BookIdMismatchException;
 import com.epam.jpop.bookservice.exception.BookNotFoundException;
 import com.epam.jpop.bookservice.repository.BookRepository;
@@ -52,8 +53,9 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
-    public void add(Book book) {
-         bookRepository.save(prepareBookEntity(book));
+    public Result add(Book book) {
+        com.epam.jpop.bookservice.entity.Book bookEntity = bookRepository.save(prepareBookEntity(book));
+        return new Result(bookEntity.getId());
     }
 
     @Override

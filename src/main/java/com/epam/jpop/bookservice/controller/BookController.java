@@ -1,6 +1,7 @@
 package com.epam.jpop.bookservice.controller;
 
 import com.epam.jpop.bookservice.domain.Book;
+import com.epam.jpop.bookservice.domain.Result;
 import com.epam.jpop.bookservice.exception.BookIdMismatchException;
 import com.epam.jpop.bookservice.service.BookService;
 import org.slf4j.Logger;
@@ -30,9 +31,9 @@ public class BookController {
     }
 
     @PostMapping
-    @ResponseStatus(HttpStatus.CREATED)
-    public void save(@RequestBody Book book) {
-        bookService.add(book);
+    public ResponseEntity<Result> save(@RequestBody Book book) {
+        Result apiResult = bookService.add(book);
+        return new ResponseEntity<>(apiResult, HttpStatus.CREATED);
     }
 
     @PutMapping("/{id}")

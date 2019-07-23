@@ -115,7 +115,7 @@ public class BookServiceApplicationTests {
         assertEquals(HttpStatus.OK.value(), response.getStatusCode());
 
         response = RestAssured.get(location);
-        assertEquals(HttpStatus.NOT_FOUND.value(), response.getStatusCode());
+        assertEquals(HttpStatus.BAD_REQUEST.value(), response.getStatusCode());
     }
 
 }
