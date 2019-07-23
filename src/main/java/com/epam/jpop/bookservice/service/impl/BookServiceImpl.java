@@ -53,7 +53,7 @@ public class BookServiceImpl implements BookService {
 
     @Override
     public void add(Book book) {
-        bookRepository.save(prepareBookEntity(book));
+         bookRepository.save(prepareBookEntity(book));
     }
 
     @Override
