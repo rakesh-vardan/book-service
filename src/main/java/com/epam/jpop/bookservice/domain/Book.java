@@ -4,6 +4,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.sql.Date;
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -11,8 +13,10 @@ public class Book {
 
     private Long id;
     private String title;
-    private String author;
+    private Author author;
+    private Category category;
     private Long isbn;
-    private String publisher;
-    private Integer publishedYear;
+    private Publisher publisher;
+    private Date publishedDate;
+    private Double price;
 }

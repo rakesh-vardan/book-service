@@ -10,10 +10,10 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 @EntityScan("com.epam.jpop.bookservice.entity")
 @ComponentScan("com.epam.jpop.bookservice")
 @SpringBootApplication
-public class Application {
+public class BookServiceApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(Application.class, args);
+		SpringApplication.run(BookServiceApplication.class, args);
 	}
 
 }
