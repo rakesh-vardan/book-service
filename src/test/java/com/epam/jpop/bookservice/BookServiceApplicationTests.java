@@ -1,5 +1,6 @@
 package com.epam.jpop.bookservice;
 
+import com.epam.jpop.bookservice.domain.Author;
 import com.epam.jpop.bookservice.domain.Book;
 import io.restassured.RestAssured;
 import io.restassured.response.Response;
@@ -15,18 +16,20 @@ import static org.apache.commons.lang3.RandomStringUtils.randomNumeric;
 import static org.junit.Assert.assertEquals;
 
 @RunWith(SpringRunner.class)
-@SpringBootTest(classes = {Application.class}, webEnvironment
+@SpringBootTest(classes = {BookServiceApplication.class}, webEnvironment
         = SpringBootTest.WebEnvironment.DEFINED_PORT)
 public class BookServiceApplicationTests {
 
     private static final String API_ROOT
             = "http://localhost:8082/api/books";
 
+
+
     private Book createRandomBook() {
         Book book = new Book();
         book.setId(1L);
         book.setTitle(randomAlphabetic(10));
-        book.setAuthor(randomAlphabetic(15));
+        book.setAuthor(new Author());
         return book;
     }
 
@@ -91,7 +94,7 @@ public class BookServiceApplicationTests {
         Book book = createRandomBook();
         String location = createBookAsUri(book);
         book.setId(Long.parseLong(location.split("api/books/")[1]));
-        book.setAuthor("newAuthor");
+        book.setAuthor(new Author());
         Response response = RestAssured.given()
                 .contentType(MediaType.APPLICATION_JSON_VALUE)
                 .body(book)
