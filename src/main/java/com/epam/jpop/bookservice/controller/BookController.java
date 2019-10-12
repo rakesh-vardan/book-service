@@ -26,49 +26,49 @@ public class BookController {
     private BookService bookService;
 
     @GetMapping
-    @ApiOperation(value = "View list of available books", response = List.class)
+    @ApiOperation(value = "View list of all available books in the library", response = List.class)
     @ApiResponses(value = {
-            @ApiResponse(code = 200, message = "Successfully retrieved list"),
-            @ApiResponse(code = 401, message = "You are not authorized to view the resource"),
+            @ApiResponse(code = 200, message = "Successfully retrieved the list of books"),
+            @ApiResponse(code = 401, message = "You are not authorized to view the resource requested"),
             @ApiResponse(code = 403, message = "Accessing the resource you were trying to reach is forbidden"),
             @ApiResponse(code = 404, message = "The resource you were trying to reach is not found")
     })
-    public ResponseEntity<Object> list() {
-        logger.info("Getting all the available books");
+    public ResponseEntity<Object> getListOfAllBooks() {
+        logger.info("Getting all the available books from the library");
         return new ResponseEntity<>(bookService.list(), HttpStatus.OK);
     }
 
     @GetMapping("/{id}")
-    @ApiOperation(value = "Get a book by Id")
+    @ApiOperation(value = "Get a book by an Id")
     public Book getBook(@PathVariable Long id) {
-        logger.info("Fetching the book details with id: {}", id);
-        return bookService.show(id);
+        logger.info("Fetching the book details with the given id: {}", id);
+        return bookService.get(id);
     }
 
     @PostMapping
-    @ApiOperation(value = "Add a new book")
-    public ResponseEntity<Result> save(
-            @ApiParam(value = "New Book details object to save the data", required = true) @RequestBody Book book) {
+    @ApiOperation(value = "Add a new book to the library")
+    public ResponseEntity<Result> addBook(
+            @ApiParam(value = "New Book details object to save the book information to library", required = true) @RequestBody Book book) {
         Result apiResult = bookService.add(book);
-        logger.info("Successfully added a new book: {}", apiResult.getId());
+        logger.info("Successfully added the given new book to library: {}", apiResult.getId());
         return new ResponseEntity<>(apiResult, HttpStatus.CREATED);
     }
 
     @PutMapping("/{id}")
-    @ApiOperation(value = "Update an existing book")
+    @ApiOperation(value = "Update an existing book from the library")
     public void update(
-            @ApiParam(value = "Book Id to Update the details", required = true) @PathVariable Long id,
-            @ApiParam(value = "Updated Book object", required = true) @Valid @RequestBody Book book)
+            @ApiParam(value = "Book Id to Update the details to", required = true) @PathVariable Long id,
+            @ApiParam(value = "Updated Book information", required = true) @Valid @RequestBody Book book)
             throws BookIdMismatchException {
-        logger.info("Updating the book details for book ID: {}", id);
+        logger.info("Updating the book details for an existing book in the library with an ID: {}", id);
         bookService.update(id, book);
     }
 
     @DeleteMapping("/{id}")
-    @ApiOperation(value = "Delete an existing book")
+    @ApiOperation(value = "Delete an existing book from the library")
     public void delete(
-            @ApiParam(value = "Book Id to delete the data", required = true) @PathVariable Long id) {
-        logger.info("Deleting the book from the system: {}", id);
+            @ApiParam(value = "Book Id to delete the data from the library", required = true) @PathVariable Long id) {
+        logger.info("Deleting the book from the library: {}", id);
         bookService.delete(id);
     }
 

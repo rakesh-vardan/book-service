@@ -31,30 +31,10 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
-    public Book show(Long id) {
-        Book book = new Book();
-
+    public Book get(Long id) {
         com.epam.jpop.bookservice.entity.Book bookEntity = bookRepository.findById(id)
                 .orElseThrow(BookNotFoundException::new);
-
-        book.setId(bookEntity.getId());
-        book.setTitle(bookEntity.getTitle());
-        book.setAuthor(getAuthorFromEntity(bookEntity.getAuthor()));
-        book.setCategory(getCategoryFromEntity(bookEntity.getCategory()));
-
-        Optional<Long> isbn = Optional.ofNullable(bookEntity.getIsbn());
-        isbn.ifPresent(book::setIsbn);
-
-        Optional<Publisher> publisher = Optional.ofNullable(getPublisherFromEntity(bookEntity.getPublisher()));
-        publisher.ifPresent(book::setPublisher);
-
-        Optional<Date> publishedYear = Optional.ofNullable(bookEntity.getPublishedDate());
-        publishedYear.ifPresent(book::setPublishedDate);
-
-        Optional<Double> price = Optional.ofNullable(bookEntity.getPrice());
-        price.ifPresent(book::setPrice);
-
-        return book;
+        return getBookFromEntity(bookEntity);
     }
 
     @Override
@@ -153,4 +133,25 @@ public class BookServiceImpl implements BookService {
         return categoryEntity;
     }
 
+
+    private Book getBookFromEntity(com.epam.jpop.bookservice.entity.Book bookEntity) {
+        Book book = new Book();
+        book.setId(bookEntity.getId());
+        book.setTitle(bookEntity.getTitle());
+        book.setAuthor(getAuthorFromEntity(bookEntity.getAuthor()));
+        book.setCategory(getCategoryFromEntity(bookEntity.getCategory()));
+
+        Optional<Long> isbn = Optional.ofNullable(bookEntity.getIsbn());
+        isbn.ifPresent(book::setIsbn);
+
+        Optional<Publisher> publisher = Optional.ofNullable(getPublisherFromEntity(bookEntity.getPublisher()));
+        publisher.ifPresent(book::setPublisher);
+
+        Optional<Date> publishedYear = Optional.ofNullable(bookEntity.getPublishedDate());
+        publishedYear.ifPresent(book::setPublishedDate);
+
+        Optional<Double> price = Optional.ofNullable(bookEntity.getPrice());
+        price.ifPresent(book::setPrice);
+        return book;
+    }
 }

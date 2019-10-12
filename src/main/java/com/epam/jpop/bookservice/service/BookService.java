@@ -10,7 +10,7 @@ public interface BookService {
 
     List<Book> list();
 
-    Book show(Long id);
+    Book get(Long id);
 
     Result add(Book book);
 
