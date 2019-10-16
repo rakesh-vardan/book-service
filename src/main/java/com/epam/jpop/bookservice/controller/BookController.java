@@ -16,7 +16,7 @@ import javax.validation.Valid;
 import java.util.List;
 
 @RestController
-@RequestMapping("api/books")
+@RequestMapping("/api/books")
 @Api(value = "book-service")
 public class BookController {
 
