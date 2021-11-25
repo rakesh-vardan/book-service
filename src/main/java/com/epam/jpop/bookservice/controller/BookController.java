@@ -12,7 +12,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -58,7 +57,7 @@ public class BookController {
     @ApiOperation(value = "Update an existing book from the library")
     public void update(
             @ApiParam(value = "Book Id to Update the details to", required = true) @PathVariable Long id,
-            @ApiParam(value = "Updated Book information", required = true) @Valid @RequestBody Book book)
+            @ApiParam(value = "Updated Book information", required = true) @RequestBody Book book)
             throws BookIdMismatchException {
         logger.info("Updating the book details for an existing book in the library with an ID: {}", id);
         bookService.update(id, book);

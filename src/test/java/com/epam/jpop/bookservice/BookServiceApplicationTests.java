@@ -4,7 +4,7 @@ import com.epam.jpop.bookservice.domain.Author;
 import com.epam.jpop.bookservice.domain.Book;
 import io.restassured.RestAssured;
 import io.restassured.response.Response;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.HttpStatus;
@@ -13,7 +13,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import static org.apache.commons.lang3.RandomStringUtils.randomAlphabetic;
 import static org.apache.commons.lang3.RandomStringUtils.randomNumeric;
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = {BookServiceApplication.class}, webEnvironment
@@ -22,7 +22,6 @@ public class BookServiceApplicationTests {
 
     private static final String API_ROOT
             = "http://localhost:8082/api/books";
-
 
 
     private Book createRandomBook() {
